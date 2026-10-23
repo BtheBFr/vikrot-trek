@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0c">
+<title>Скачать песню</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html, body { height:100%; overflow:hidden; }
+  body {
+    display:flex; align-items:center; justify-content:center;
+    background: radial-gradient(circle at 50% 25%, #1c1c24 0%, #08080a 70%);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color:#fff;
+    height:100dvh;
+    padding: calc(24px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom));
+    user-select:none;
+  }
+  .wrap { width:100%; max-width:520px; display:flex; flex-direction:column; align-items:center; gap:36px; }
+
+  .cover {
+    width: min(60vw, 240px); aspect-ratio:1/1; border-radius:24px;
+    background: linear-gradient(145deg, #2b2b38, #15151c);
+    box-shadow: 0 20px 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08);
+    display:flex; align-items:center; justify-content:center;
+    font-size:64px; opacity:.9;
+  }
+
+  h1 {
+    font-size: clamp(18px, 5.5vw, 26px);
+    font-weight:600; letter-spacing:-.02em; text-align:center;
+    line-height:1.3;
+  }
+
+  .btn {
+    width:100%;
+    display:block;
+    padding: 26px 20px;
+    border:none; border-radius:22px;
+    background: linear-gradient(180deg, #ffffff, #e6e6ec);
+    color:#0a0a0c;
+    font-size: clamp(20px, 6vw, 26px);
+    font-weight:700; letter-spacing:-.02em;
+    text-align:center; text-decoration:none;
+    box-shadow: 0 12px 34px rgba(255,255,255,.16);
+    transition: transform .12s ease, box-shadow .12s ease, opacity .2s;
+    cursor:pointer;
+  }
+  .btn:active { transform: scale(.97); box-shadow: 0 6px 18px rgba(255,255,255,.12); }
+  .btn.done { background: linear-gradient(180deg,#4ade80,#22c55e); color:#052e12; }
+
+  .hint { font-size:14px; color:#8a8a96; text-align:center; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="cover">🎵</div>
+    <h1>Листья желтые медленно падают</h1>
+
+    <!-- Вставляем название файла ровно как на скриншоте -->
+    <a class="btn" id="dl" href="Листья желтые медленно падают.mp3" download="Листья желтые медленно падают.mp3">
+      Скачать
+    </a>
+
+    <div class="hint">Нажми, чтобы сохранить на телефон</div>
+  </div>
+
+<script>
+  const btn = document.getElementById('dl');
+  btn.addEventListener('click', () => {
+    const old = btn.textContent;
+    btn.textContent = 'Скачивается…';
+    setTimeout(() => {
+      btn.textContent = 'Готово ✓';
+      btn.classList.add('done');
+      setTimeout(() => {
+        btn.textContent = old;
+        btn.classList.remove('done');
+      }, 2000);
+    }, 600);
+  });
+</script>
+</body>
+</html>
